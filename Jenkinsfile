@@ -9,12 +9,13 @@ pipeline{
     }
     stage("Build Docker Image"){
       steps{
-        sh "docker build -t node-app-image ."
+        sh "docker build -t node-app-image:latest ."
+        sh 'docker build -t node-app-image:${env.BUILD_NUMBER} .'
       }
     }
     stage("Run Docker container"){
       steps{
-        sh "docker run -d -p 80:5000 --name node-app node-app-image"
+        sh "docker run -d -p 80:5000 --name node-app node-app-image:latest"
       }
     }
   }
