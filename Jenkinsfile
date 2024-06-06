@@ -10,6 +10,7 @@ pipeline{
     stage("Build Docker Image"){
       steps{
         sh "docker build -t node-app-image:latest ."
+        sleep 30
         sh 'docker build -t node-app-image:${env.BUILD_NUMBER} .'
       }
     }
